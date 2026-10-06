@@ -1,6 +1,6 @@
 <div align="center">
 
-# Prepr — AI Mock Interview Platform
+# InterviewIQ — AI-Powered Personalized Mock Interviews
 
 **A live, voice-first AI interviewer that listens, asks sharp follow-ups, adapts difficulty in real time, and returns an evidence-backed scorecard.**
 
@@ -29,7 +29,7 @@ Not a chatbot. Not a question bank. A reasoning engine that evaluates before it 
 
 ## Demo
 
-Watch the full demo of the **Prepr** in action.
+Watch the full demo of the **InterviewIQ** in action.
 
 <p align="center">
   <a href="https://vimeo.com/1206815065?share=copy&fl=sv&fe=ci">
@@ -45,7 +45,7 @@ Watch the full demo of the **Prepr** in action.
 
 ## Overview
 
-Prepr is a full-stack, production-grade platform that runs realistic technical
+InterviewIQ is a full-stack, production-grade platform that runs realistic technical
 interviews by voice. You speak your answers; it transcribes them, reasons about
 their quality, decides what to ask next, and speaks the next question back —
 then delivers a detailed report where every score is justified by direct quotes
