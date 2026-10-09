@@ -2,6 +2,7 @@
   "name": "interviewiq",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "Production-grade AI-powered voice mock interview platform",
   "homepage": "https://interviewiq-24h3.onrender.com",
   "repository": {

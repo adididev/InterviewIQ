@@ -26,6 +26,7 @@ Demo login: `demo@interviewiq.dev` / `demo1234` — or create your own free acco
 ![Cartesia](https://img.shields.io/badge/Cartesia_TTS-6E56CF?logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=black)
 ![Neon](https://img.shields.io/badge/Neon_Postgres-00E599?logo=neon&logoColor=black)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 </div>
 
@@ -242,6 +243,10 @@ function size limits and the embedding model needs a writable disk.
 
 - **App** — any Node host. Build `npm install --include=dev && npx prisma migrate deploy && npm run build`, start `npm run start`.
 - **Database** — any managed Postgres with the `vector` extension. Point `DATABASE_URL` at the pooled connection and `DIRECT_URL` at the direct one, then run `prisma migrate deploy`.
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ---
 
