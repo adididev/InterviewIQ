@@ -6,7 +6,7 @@
 
 Not a chatbot. Not a question bank. A reasoning engine that evaluates before it speaks.
 
-### [▶ Try it live — interviewiq-24h3.onrender.com](https://interviewiq-24h3.onrender.com)
+### [▶ Try it live](https://interviewiq-24h3.onrender.com)
 
 Demo login: `demo@interviewiq.dev` / `demo1234` — or create your own free account.
 
