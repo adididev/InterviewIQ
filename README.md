@@ -1,10 +1,6 @@
 <div align="center">
 
-<<<<<<< HEAD
 # InterviewIQ — AI-Powered Personalized Mock Interviews
-=======
-# InterviewIQ — AI Mock Interview Platform
->>>>>>> 66d00e0 (Rename InterviewIQ across project)
 
 **A live, voice-first AI interviewer that listens, asks sharp follow-ups, adapts difficulty in real time, and returns an evidence-backed scorecard.**
 
@@ -219,7 +215,7 @@ npm run db:push               # 4. create the schema
 npm run dev                   # 5. http://localhost:3000
 ```
 
-Optional demo account: `npm run db:seed` → `demo@InterviewIQ.dev` / `demo1234`.
+Optional demo account: `npm run db:seed` → `demo@interviewiq.dev` / `demo1234`.
 
 Without `GROQ_API_KEY`, auth, resume upload, and database flows all work and
 voice uses the browser engines; the interviewer's questions and reports need
@@ -250,7 +246,7 @@ embedding runtime loads once and semantic resume search stays fully functional.
 It's deployed on [Render](https://render.com) (see [`render.yaml`](render.yaml))
 with a [Neon](https://neon.tech) Postgres database (pgvector enabled).
 
-- **App** — any Node host. Build `npm install --include=dev && npm run build`, start `npm run start`.
+- **App** — any Node host. Build `npm install --include=dev && npx prisma migrate deploy && npm run build`, start `npm run start`.
 - **Database** — any managed Postgres with the `vector` extension. Point `DATABASE_URL` at the pooled connection and `DIRECT_URL` at the direct one, then run `prisma migrate deploy`.
 
 ---

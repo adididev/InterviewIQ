@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// AI Mock Interview Platform — Data model (Phase 2)
+// InterviewIQ — Data model (Phase 2)
 //
 // Design notes:
 //  • The relational spine is User → Interview → (turns / evaluations / topics)

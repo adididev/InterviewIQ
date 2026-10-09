@@ -8,14 +8,17 @@
 # NOTE: build uses `--include=dev` because Render sets NODE_ENV=production, and
 # a plain `npm install` would then skip devDependencies (typescript, next,
 # tailwind, prisma), breaking the build.
+#
+# `prisma migrate deploy` applies pending migrations (incl. the pgvector
+# extension) to the database via DIRECT_URL before each build.
 services:
   - type: web
-    name: InterviewIQ-ai-mock-interview
+    name: interviewiq
     runtime: node
     plan: free
     region: ohio
     branch: main
-    buildCommand: npm install --include=dev && npm run build
+    buildCommand: npm install --include=dev && npx prisma migrate deploy && npm run build
     startCommand: npm run start
     healthCheckPath: /
     autoDeploy: true

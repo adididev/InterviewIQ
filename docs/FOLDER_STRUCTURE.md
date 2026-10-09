@@ -4,7 +4,7 @@ Clean, layered architecture. Dependencies point **inward**: UI → services → 
 No business logic ever lives in a React component.
 
 ```
-ai-mock-interview/
+interviewiq/
 ├── docs/                        Architecture & design docs
 ├── prisma/
 │   ├── schema.prisma            Data model (Phase 2)
