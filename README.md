@@ -31,22 +31,6 @@ Demo login: `demo@interviewiq.dev` / `demo1234` — or create your own free acco
 
 ---
 
-## Demo
-
-Watch the full demo of the **InterviewIQ** in action.
-
-<p align="center">
-  <a href="https://vimeo.com/1206815065?share=copy&fl=sv&fe=ci">
-    <img src="docs/IMG_6664.jpg" alt="InterviewIQ-AI Mock Interview Demo" width="900">
-  </a>
-</p>
-
-<p align="center">
-  <strong>▶ Click the image above to watch the full demo on Vimeo.</strong>
-</p>
-
----
-
 ## Overview
 
 InterviewIQ is a full-stack, production-grade platform that runs realistic technical
