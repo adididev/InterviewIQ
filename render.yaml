@@ -30,9 +30,9 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: GROQ_MODEL_QUALITY
-        value: llama-3.3-70b-versatile
+        value: openai/gpt-oss-120b
       - key: GROQ_MODEL_FAST
-        value: llama-3.1-8b-instant
+        value: openai/gpt-oss-20b
       - key: DEEPGRAM_MODEL
         value: nova-2
       - key: CARTESIA_MODEL

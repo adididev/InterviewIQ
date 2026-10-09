@@ -23,6 +23,23 @@ function pickModel(speed: Speed): string {
   return speed === "quality" ? env.GROQ_MODEL_QUALITY : env.GROQ_MODEL_FAST;
 }
 
+/**
+ * Reasoning models (gpt-oss, qwen3) spend hidden reasoning tokens out of
+ * max_tokens before writing the answer. Keep reasoning short for live-voice
+ * latency and add headroom so the visible answer is never truncated.
+ */
+const REASONING_TOKEN_BUDGET = 1024;
+
+function modelParams(speed: Speed, maxTokens: number) {
+  const model = pickModel(speed);
+  if (!/gpt-oss|qwen3/i.test(model)) return { model, max_tokens: maxTokens };
+  return {
+    model,
+    max_tokens: maxTokens + REASONING_TOKEN_BUDGET,
+    reasoning_effort: "low" as const,
+  };
+}
+
 export interface ChatMessage {
   role: "system" | "user" | "assistant";
   content: string;
@@ -40,10 +57,9 @@ export async function chatText(
   opts: BaseOpts = {},
 ): Promise<string> {
   const res = await groq().chat.completions.create({
-    model: pickModel(opts.speed ?? "quality"),
+    ...modelParams(opts.speed ?? "quality", opts.maxTokens ?? 400),
     messages,
     temperature: opts.temperature ?? 0.7,
-    max_tokens: opts.maxTokens ?? 400,
   });
   return res.choices[0]?.message?.content?.trim() ?? "";
 }
@@ -54,10 +70,9 @@ export async function* chatStream(
   opts: BaseOpts = {},
 ): AsyncGenerator<string> {
   const stream = await groq().chat.completions.create({
-    model: pickModel(opts.speed ?? "quality"),
+    ...modelParams(opts.speed ?? "quality", opts.maxTokens ?? 400),
     messages,
     temperature: opts.temperature ?? 0.7,
-    max_tokens: opts.maxTokens ?? 400,
     stream: true,
   });
   for await (const chunk of stream) {
@@ -86,10 +101,9 @@ export async function chatJSON<T>(
   opts: BaseOpts = {},
 ): Promise<T> {
   const res = await groq().chat.completions.create({
-    model: pickModel(opts.speed ?? "fast"),
+    ...modelParams(opts.speed ?? "fast", opts.maxTokens ?? 1024),
     messages,
     temperature: opts.temperature ?? 0.2,
-    max_tokens: opts.maxTokens ?? 1024,
     response_format: { type: "json_object" },
   });
   const raw = res.choices[0]?.message?.content ?? "{}";

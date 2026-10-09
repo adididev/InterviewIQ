@@ -26,6 +26,8 @@
     "@deepgram/sdk": "5.5.0",
     "@langchain/core": "1.2.1",
     "@langchain/langgraph": "1.4.7",
+    "@neon/config": "^1.8.6",
+    "@neon/env": "^1.5.3",
     "@prisma/client": "6.19.3",
     "@radix-ui/react-avatar": "1.2.1",
     "@radix-ui/react-dialog": "1.1.18",

@@ -133,7 +133,7 @@ Deeper write-ups: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) ·
 | Frontend       | Next.js 16 (App Router), React 19, TypeScript, Tailwind v4, shadcn/ui, Framer Motion, Recharts |
 | Backend / API  | Next.js Route Handlers (Node runtime), clean service layer       |
 | Reasoning engine | LangGraph.js (`@langchain/langgraph`) StateGraph               |
-| LLM            | Groq (`llama-3.3-70b-versatile` quality · `llama-3.1-8b-instant` fast) |
+| LLM            | Groq (`openai/gpt-oss-120b` quality · `openai/gpt-oss-20b` fast) |
 | Embeddings     | `fastembed` → **BAAI/bge-small-en-v1.5** (384-dim), local, no key |
 | Speech-to-text | Deepgram streaming → browser `SpeechRecognition` fallback         |
 | Text-to-speech | Cartesia (`sonic-2`) → browser `speechSynthesis` fallback        |

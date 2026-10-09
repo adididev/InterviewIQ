@@ -12,6 +12,11 @@ import {
 import type { ResumeAnalysis, ResumeSummary } from "@/types/resume";
 
 const strArr = z.array(z.string()).default([]);
+// Models sometimes return years/durations as numbers (e.g. 2021); accept both.
+const optStr = z
+  .preprocess((v) => (typeof v === "number" ? String(v) : v), z.string().nullable())
+  .catch(null)
+  .default(null);
 
 const resumeAnalysisSchema = z.object({
   fullName: z.string().nullable().catch(null).default(null),
@@ -36,7 +41,7 @@ const resumeAnalysisSchema = z.object({
       z.object({
         company: z.string().default(""),
         role: z.string().default(""),
-        duration: z.string().nullable().default(null),
+        duration: optStr,
         highlights: strArr,
       }),
     )
@@ -46,7 +51,7 @@ const resumeAnalysisSchema = z.object({
       z.object({
         institution: z.string().default(""),
         degree: z.string().default(""),
-        year: z.string().nullable().default(null),
+        year: optStr,
       }),
     )
     .default([]),

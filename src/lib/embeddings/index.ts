@@ -19,9 +19,56 @@ import { env } from "@/lib/env";
  */
 let modelPromise: Promise<FlagEmbedding> | null = null;
 
+/**
+ * fastembed's built-in download (Qdrant's public GCS bucket) is no longer
+ * publicly readable, so fetch the same quantized ONNX model from Qdrant's
+ * Hugging Face repo into the directory layout fastembed expects. fastembed
+ * then finds the model directory and skips its own download.
+ */
+const HF_MODEL_BASE =
+  "https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-q/resolve/main";
+const MODEL_FILES = [
+  "model_optimized.onnx",
+  "tokenizer.json",
+  "config.json",
+  "tokenizer_config.json",
+  "special_tokens_map.json",
+];
+
+async function ensureModelFiles(cacheDir: string, modelName: string) {
+  const fs = await import("node:fs/promises");
+  const path = await import("node:path");
+  const modelDir = path.join(cacheDir, modelName);
+  const exists = await fs.stat(modelDir).then(() => true, () => false);
+  if (exists) return;
+
+  // A failed GCS download leaves an error page behind as the .tar.gz, which
+  // fastembed would otherwise keep trying to extract.
+  await fs.rm(path.join(cacheDir, `${modelName}.tar.gz`), { force: true });
+
+  // Download into a temp dir and rename, so a crash never leaves a partial model.
+  const tmpDir = `${modelDir}.partial-${process.pid}`;
+  await fs.rm(tmpDir, { recursive: true, force: true });
+  await fs.mkdir(tmpDir, { recursive: true });
+  try {
+    for (const file of MODEL_FILES) {
+      const res = await fetch(`${HF_MODEL_BASE}/${file}`);
+      if (!res.ok) throw new Error(`Model download failed: ${file} (${res.status})`);
+      await fs.writeFile(path.join(tmpDir, file), Buffer.from(await res.arrayBuffer()));
+    }
+    await fs.rename(tmpDir, modelDir);
+  } catch (err) {
+    await fs.rm(tmpDir, { recursive: true, force: true });
+    // Another request may have finished the same download concurrently.
+    if (await fs.stat(modelDir).then(() => true, () => false)) return;
+    throw err;
+  }
+}
+
 function getModel(): Promise<FlagEmbedding> {
   modelPromise ??= (async () => {
     const { EmbeddingModel, FlagEmbedding } = await import("fastembed");
+    await ensureModelFiles(env.EMBEDDING_CACHE_DIR, EmbeddingModel.BGESmallENV15);
     return FlagEmbedding.init({
       model: EmbeddingModel.BGESmallENV15,
       cacheDir: env.EMBEDDING_CACHE_DIR,

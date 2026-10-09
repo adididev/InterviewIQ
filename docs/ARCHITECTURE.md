@@ -66,8 +66,8 @@ The interviewer node runs **last and only after** evaluation + planning, guarant
 
 ### Latency strategy
 - STT is streaming (partial transcripts) so the UI feels live.
-- Evaluator + planner use the **fast** Groq model (`llama-3.1-8b-instant`), the
-  interviewer and report use the **quality** model (`llama-3.3-70b-versatile`).
+- Evaluator + planner use the **fast** Groq model (`openai/gpt-oss-20b`), the
+  interviewer and report use the **quality** model (`openai/gpt-oss-120b`).
 - The interviewer response is streamed token-by-token straight into TTS.
 - Resume analysis + report generation are the only "slow" paths and are off the hot loop.
 

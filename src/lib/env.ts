@@ -17,8 +17,8 @@ const schema = z.object({
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 
   GROQ_API_KEY: z.string().default(""),
-  GROQ_MODEL_QUALITY: z.string().default("llama-3.3-70b-versatile"),
-  GROQ_MODEL_FAST: z.string().default("llama-3.1-8b-instant"),
+  GROQ_MODEL_QUALITY: z.string().default("openai/gpt-oss-120b"),
+  GROQ_MODEL_FAST: z.string().default("openai/gpt-oss-20b"),
 
   DEEPGRAM_API_KEY: z.string().default(""),
   DEEPGRAM_MODEL: z.string().default("nova-2"),

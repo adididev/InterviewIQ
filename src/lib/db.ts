@@ -15,6 +15,9 @@ export const prisma =
       process.env.NODE_ENV === "development"
         ? ["error", "warn"]
         : ["error"],
+    // Interview turns persist ~10 sequential writes in one transaction; the
+    // 5s default is too tight against a remote (Neon) database.
+    transactionOptions: { maxWait: 10_000, timeout: 20_000 },
   });
 
 if (process.env.NODE_ENV !== "production") {
