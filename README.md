@@ -6,6 +6,10 @@
 
 Not a chatbot. Not a question bank. A reasoning engine that evaluates before it speaks.
 
+### [▶ Try it live — interviewiq-24h3.onrender.com](https://interviewiq-24h3.onrender.com)
+
+Demo login: `demo@interviewiq.dev` / `demo1234` — or create your own free account.
+
 <sub>Hosted on a free instance that sleeps when idle — the first load can take ~30–60s to wake. Everything after is instant.</sub>
 
 <br/>
@@ -208,6 +212,7 @@ src/
 **Prerequisites:** Node 20+, Docker.
 
 ```bash
+git clone https://github.com/adididev/InterviewIQ.git && cd InterviewIQ
 cp .env.example .env          # 1. add a JWT_SECRET (and GROQ_API_KEY for AI)
 npm install                   # 2. install deps (also generates the Prisma client)
 npm run db:up                 # 3. start PostgreSQL + pgvector (Docker)
@@ -243,8 +248,13 @@ Provider keys never reach the browser: Deepgram uses a short-lived token
 
 The app runs as a **persistent Node server** (`next start`) so the native
 embedding runtime loads once and semantic resume search stays fully functional.
-It's deployed on [Render](https://render.com) (see [`render.yaml`](render.yaml))
-with a [Neon](https://neon.tech) Postgres database (pgvector enabled).
+It's live at **[interviewiq-24h3.onrender.com](https://interviewiq-24h3.onrender.com)**,
+deployed on [Render](https://render.com) (see [`render.yaml`](render.yaml)) with a
+[Neon](https://neon.tech) Postgres database (pgvector enabled). Every push to `main`
+redeploys automatically.
+
+Serverless hosts such as Vercel aren't a fit: the native ONNX runtime exceeds
+function size limits and the embedding model needs a writable disk.
 
 - **App** — any Node host. Build `npm install --include=dev && npx prisma migrate deploy && npm run build`, start `npm run start`.
 - **Database** — any managed Postgres with the `vector` extension. Point `DATABASE_URL` at the pooled connection and `DIRECT_URL` at the direct one, then run `prisma migrate deploy`.
