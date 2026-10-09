@@ -66,7 +66,7 @@ export function FeatureSection() {
         <SectionHeading
           eyebrow="Why it's different"
           title="An interviewer, not a question bank"
-          subtitle="Prepr simulates an experienced engineering manager who actually listens and adapts."
+          subtitle="InterviewIQ simulates an experienced engineering manager who actually listens and adapts."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f) => (

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-/** Prepr wordmark + glyph. The glyph is a stylized soundwave (voice-first). */
+/** InterviewIQ wordmark + glyph. The glyph is a stylized soundwave (voice-first). */
 export function Logo({
   href = "/",
   className,
@@ -33,7 +33,7 @@ export function Logo({
       </span>
       {showWordmark && (
         <span className="text-[15px] font-semibold tracking-tight text-foreground">
-          Prepr
+          InterviewIQ
         </span>
       )}
     </Link>

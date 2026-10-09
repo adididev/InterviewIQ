@@ -51,7 +51,7 @@ export function Hero() {
             animate="show"
             className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground"
           >
-            Not a quiz. A real conversation. Prepr listens to your answers, asks
+            Not a quiz. A real conversation. InterviewIQ listens to your answers, asks
             sharp follow-ups, challenges weak reasoning, and adapts difficulty in
             real time — then hands you an evidence-backed scorecard.
           </motion.p>

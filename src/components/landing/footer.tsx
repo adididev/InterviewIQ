@@ -29,7 +29,7 @@ export function Footer() {
       <footer className="border-t border-border/60">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
           <Logo />
-          <p>© {new Date().getFullYear()} Prepr. Practice, out loud.</p>
+          <p>© {new Date().getFullYear()} InterviewIQ. Practice, out loud.</p>
         </div>
       </footer>
     </>

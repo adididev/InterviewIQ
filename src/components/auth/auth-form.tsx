@@ -32,7 +32,7 @@ export function AuthForm({ mode, next }: { mode: Mode; next?: string }) {
         isSignup ? "/api/auth/register" : "/api/auth/login",
         { method: "POST", body: JSON.stringify(payload) },
       );
-      toast.success(isSignup ? "Welcome to Prepr" : "Welcome back");
+      toast.success(isSignup ? "Welcome to InterviewIQ" : "Welcome back");
       router.push(next && next.startsWith("/") ? next : "/dashboard");
       router.refresh();
     } catch (err) {
@@ -83,7 +83,7 @@ export function AuthForm({ mode, next }: { mode: Mode; next?: string }) {
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">
-        {isSignup ? "Already have an account? " : "New to Prepr? "}
+        {isSignup ? "Already have an account? " : "New to InterviewIQ? "}
         <Link
           href={isSignup ? "/login" : "/signup"}
           className="font-medium text-foreground underline-offset-4 hover:underline"

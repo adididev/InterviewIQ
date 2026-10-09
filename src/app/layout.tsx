@@ -17,12 +17,12 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Prepr — AI Mock Interviews",
-    template: "%s · Prepr",
+    default: "InterviewIQ — AI Mock Interviews",
+    template: "%s · InterviewIQ",
   },
   description:
     "Practice real, adaptive voice interviews with an AI engineering manager that listens, follows up, and gives evidence-based feedback.",
-  applicationName: "Prepr",
+  applicationName: "InterviewIQ",
 };
 
 export const viewport: Viewport = {

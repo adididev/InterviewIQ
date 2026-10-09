@@ -10,7 +10,7 @@
 # tailwind, prisma), breaking the build.
 services:
   - type: web
-    name: prepr-ai-mock-interview
+    name: InterviewIQ-ai-mock-interview
     runtime: node
     plan: free
     region: ohio

@@ -57,7 +57,7 @@ export function AppShell({
       ? "Interview"
       : pathname.startsWith("/report")
         ? "Report"
-        : "Prepr");
+        : "InterviewIQ");
 
   return (
     <div className="min-h-dvh md:grid md:grid-cols-[240px_1fr]">

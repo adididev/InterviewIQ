@@ -1,6 +1,10 @@
 <div align="center">
 
+<<<<<<< HEAD
 # InterviewIQ — AI-Powered Personalized Mock Interviews
+=======
+# InterviewIQ — AI Mock Interview Platform
+>>>>>>> 66d00e0 (Rename InterviewIQ across project)
 
 **A live, voice-first AI interviewer that listens, asks sharp follow-ups, adapts difficulty in real time, and returns an evidence-backed scorecard.**
 
@@ -33,7 +37,7 @@ Watch the full demo of the **InterviewIQ** in action.
 
 <p align="center">
   <a href="https://vimeo.com/1206815065?share=copy&fl=sv&fe=ci">
-    <img src="docs/IMG_6664.jpg" alt="Prepr-AI Mock Interview Demo" width="900">
+    <img src="docs/IMG_6664.jpg" alt="InterviewIQ-AI Mock Interview Demo" width="900">
   </a>
 </p>
 
@@ -215,7 +219,7 @@ npm run db:push               # 4. create the schema
 npm run dev                   # 5. http://localhost:3000
 ```
 
-Optional demo account: `npm run db:seed` → `demo@prepr.dev` / `demo1234`.
+Optional demo account: `npm run db:seed` → `demo@InterviewIQ.dev` / `demo1234`.
 
 Without `GROQ_API_KEY`, auth, resume upload, and database flows all work and
 voice uses the browser engines; the interviewer's questions and reports need
