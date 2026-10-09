@@ -108,7 +108,8 @@ export function useTextToSpeech() {
     cancel();
     setSpeaking(true);
     
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioCtx = new (window.AudioContext ||
+      (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext!)();
     audioCtxRef.current = audioCtx;
     streamStartTimeRef.current = audioCtx.currentTime;
     streamNodesRef.current = [];
@@ -138,7 +139,7 @@ export function useTextToSpeech() {
           source.onended = () => {
             streamNodesRef.current = streamNodesRef.current.filter(n => n !== source);
           };
-        } catch (e) {
+        } catch {
           // If decoding fails, ignore (can happen if chunk boundary splits a frame)
         }
       },

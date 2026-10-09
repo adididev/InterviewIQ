@@ -7,19 +7,18 @@ import { useEffect, useRef, useState } from "react";
  * Exposes a normalized RMS level (0-1) for silence detection, and an
  * array of frequency amplitudes for waveform visualization.
  */
+const NO_AMPLITUDES: number[] = [];
+
 export function useMicAmplitude(stream: MediaStream | null) {
   const [rmsLevel, setRmsLevel] = useState(0);
   const [amplitudes, setAmplitudes] = useState<number[]>([]);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!stream) {
-      setRmsLevel(0);
-      setAmplitudes([]);
-      return;
-    }
+    if (!stream) return;
 
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioCtx = new (window.AudioContext ||
+      (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext!)();
     const analyser = audioCtx.createAnalyser();
     analyser.fftSize = 128;
     const source = audioCtx.createMediaStreamSource(stream);
@@ -59,5 +58,8 @@ export function useMicAmplitude(stream: MediaStream | null) {
     };
   }, [stream]);
 
-  return { rmsLevel, amplitudes };
+  // With no stream the last frame's values are stale; report silence instead.
+  return stream
+    ? { rmsLevel, amplitudes }
+    : { rmsLevel: 0, amplitudes: NO_AMPLITUDES };
 }

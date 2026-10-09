@@ -325,7 +325,7 @@ export async function toggleShare(
   });
   if (!interview || !interview.report) throw new ApiError(404, "Report not found.");
 
-  let token = enable ? interview.report.shareToken || crypto.randomUUID() : null;
+  const token = enable ? interview.report.shareToken || crypto.randomUUID() : null;
   
   await prisma.interviewReport.update({
     where: { id: interview.report.id },

@@ -35,21 +35,15 @@ export function useSilenceDetector(
   }, [onSilence]);
 
   useEffect(() => {
-    if (!enabled) {
-      setSilenceProgress(0);
+    if (!enabled || rmsLevel > rmsThreshold) {
+      // Disabled, or noise detected: reset the silence timer. Progress is cleared
+      // on the next frame so a later silence block never starts from a stale value.
       silenceStartRef.current = null;
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
-      return;
-    }
-
-    if (rmsLevel > rmsThreshold) {
-      // Noise detected, reset silence timer
-      silenceStartRef.current = null;
-      setSilenceProgress(0);
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
+      frameRef.current = requestAnimationFrame(() => {
         frameRef.current = null;
-      }
+        setSilenceProgress(0);
+      });
     } else {
       // Silence detected, start/continue timer
       if (!silenceStartRef.current) {
@@ -75,5 +69,8 @@ export function useSilenceDetector(
     }
   }, [rmsLevel, rmsThreshold, silenceDurationMs, enabled]);
 
-  return { silenceProgress };
+  // Report 0 immediately while disabled or noisy (the state reset lands a frame later).
+  return {
+    silenceProgress: !enabled || rmsLevel > rmsThreshold ? 0 : silenceProgress,
+  };
 }

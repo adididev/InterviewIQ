@@ -1,10 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { handleError, ApiError } from "@/lib/http";
 import { requireUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import { semanticResumeSearch } from "@/services/resume.service";
-import { finalizeInterview } from "@/services/interview.service";
 import { memoryNode } from "@/agents/nodes/memory.node";
 import { evaluatorNode } from "@/agents/nodes/evaluator.node";
 import { plannerNode } from "@/agents/nodes/planner.node";
@@ -66,7 +66,6 @@ export async function POST(req: NextRequest) {
     // 2. Start streaming LLM text
     const resumeBrief = formatResume(state.resume);
     let textStream: AsyncGenerator<string>;
-    let isEnding = false;
     
     // Fall back to just returning the closing if ended
     if (plan.action === "end") {
@@ -141,7 +140,7 @@ export async function POST(req: NextRequest) {
                 correctness: evaluation.correctness, depth: evaluation.depth, confidence: evaluation.confidence,
                 communication: evaluation.communication, technical: evaluation.technical,
                 strengths: evaluation.strengths, weaknesses: evaluation.weaknesses,
-                raw: evaluation as any,
+                raw: evaluation as unknown as Prisma.InputJsonValue,
               },
             });
             await tx.conversationTurn.create({
@@ -149,7 +148,7 @@ export async function POST(req: NextRequest) {
             });
             await tx.interview.update({
               where: { id: interviewId },
-              data: { state: state as any, difficulty: state.difficulty },
+              data: { state: state as unknown as Prisma.InputJsonValue, difficulty: state.difficulty },
             });
             for (const t of state.topics) {
               await tx.topicProgress.upsert({

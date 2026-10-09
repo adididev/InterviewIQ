@@ -25,7 +25,7 @@ export function Waveform({
   return (
     <div className="flex h-24 items-center justify-center gap-[3px]">
       {Array.from({ length: bars }).map((_, i) => {
-        let heightProp: any = { height: 6 };
+        let heightProp: { height: number | number[] } = { height: 6 };
         
         if (active) {
           if (amplitudes && amplitudes.length > 0) {

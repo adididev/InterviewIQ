@@ -111,7 +111,9 @@ export function useVoiceInterview(params: {
   }, [stt, params.interviewId, speak, beginListening, router]);
 
   const { silenceProgress } = useSilenceDetector(rmsLevel, {
-    enabled: phase === "listening" && liveCaption.length > 0 && !submittingRef.current,
+    // submitAnswer guards against double submits itself (submittingRef), and
+    // phase leaves "listening" as soon as a submit starts.
+    enabled: phase === "listening" && liveCaption.length > 0,
     onSilence: submitAnswer,
   });
 
